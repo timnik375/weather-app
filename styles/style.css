@@ -1,0 +1,335 @@
+* {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+:root {
+  font-family: "SF Pro Display", sans-serif;
+  color: #ffffff;
+}
+
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.background-blur {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(290px);
+  border-radius: 15px;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0 20px;
+  padding: 0 0 15px 35px;
+  position: relative;
+  z-index: 1;
+}
+.wrapper .content {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 2fr;
+  gap: 0 0;
+}
+.wrapper .content .current-weather {
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+}
+.wrapper .content .current-weather .current-weather-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.wrapper .content .current-weather .current-weather-container .current-weather-city {
+  font-size: 37px;
+}
+.wrapper .content .current-weather .current-weather-container .current-weather-temperature {
+  font-size: 102px;
+  font-weight: 200;
+}
+.wrapper .content .current-weather .current-weather-container .current-weather-conditions {
+  font-size: 24px;
+}
+.wrapper .content .current-weather .current-weather-container .current-weather-peaks {
+  display: flex;
+  justify-content: space-between;
+  font-size: 21px;
+  font-weight: 500;
+  padding: 0 10px;
+}
+.wrapper .content .forecast {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-gap: 35px;
+}
+.wrapper .content .forecast .text-medium {
+  font-weight: 500;
+  font-size: 22px;
+  color: #e9e9e9;
+}
+.wrapper .content .forecast .forecast-day {
+  padding: 15px 40px 15px 15px;
+}
+.wrapper .content .forecast .forecast-day .forecast-day-heading {
+  text-align: center;
+  color: #e9e9e9;
+  font-weight: 500;
+  font-size: 15px;
+  margin-bottom: 20px;
+}
+.wrapper .content .forecast .forecast-day .forecast-day-list .forecast-day-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  border-bottom: 0.2px solid rgba(233, 233, 233, 0.5);
+}
+.wrapper .content .forecast .forecast-day .forecast-day-list .forecast-day-item .forecast-day-week {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.wrapper .content .forecast .forecast-day .forecast-day-list .forecast-day-item .forecast-day-week .forecast-day-week-name {
+  margin-right: 15px;
+}
+.wrapper .content .forecast .forecast-day .forecast-day-list .forecast-day-item .forecast-day-week .forecast-day-week-weather .forecast-day-week-weather-icon {
+  width: 25px;
+  height: 25px;
+  background-image: url("../icons/rainy.svg");
+  background-size: cover;
+}
+.wrapper .content .forecast .forecast-day .forecast-day-list .forecast-day-item .forecast-day-week .forecast-day-week-weather .forecast-day-week-weather-percent {
+  color: #23abf6;
+  font-weight: 600;
+  font-size: 15px;
+}
+.wrapper .content .forecast .forecast-day .forecast-day-list .forecast-day-item .forecast-day-temperature {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.wrapper .content .forecast .forecast-day .forecast-day-list .forecast-day-item .forecast-day-temperature .forecast-day-temperature-bar {
+  margin: 0 10px;
+}
+.wrapper .content .forecast .forecast-details {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 2fr;
+  grid-gap: 50px 0;
+}
+.wrapper .content .forecast .forecast-details .forecast-hour {
+  padding: 10px;
+}
+.wrapper .content .forecast .forecast-details .forecast-hour .forecast-hour-heading {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  padding-bottom: 8px;
+  color: #e9e9e9;
+  border-bottom: 0.2px solid rgba(233, 233, 233, 0.5);
+}
+.wrapper .content .forecast .forecast-details .forecast-hour .forecast-hour-list {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 8px;
+}
+.wrapper .content .forecast .forecast-details .forecast-hour .forecast-hour-list .forecast-hour-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.wrapper .content .forecast .forecast-details .forecast-hour .forecast-hour-list .forecast-hour-item .forecast-hour-item-time {
+  font-weight: 500;
+  font-size: 17px;
+  color: #e9e9e9;
+}
+.wrapper .content .forecast .forecast-details .forecast-hour .forecast-hour-list .forecast-hour-item .forecast-hour-item-icon {
+  width: 25px;
+  height: 25px;
+  margin: 25px 0;
+  background-image: url("../icons/rainy.svg");
+  background-size: cover;
+}
+.wrapper .content .forecast .forecast-details .forecast-details-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-column-gap: 15px;
+  grid-row-gap: 50px;
+  color: #e9e9e9;
+}
+.wrapper .content .forecast .forecast-details .forecast-details-list .uv-index {
+  font-weight: 500;
+}
+.wrapper .content .forecast .forecast-details .forecast-details-list .uv-index .forecast-details-item-heading-icon {
+  background-image: url("../icons/uvindex.svg");
+}
+.wrapper .content .forecast .forecast-details .forecast-details-list .uv-index .uv-index-level-num {
+  font-size: 44px;
+}
+.wrapper .content .forecast .forecast-details .forecast-details-list .uv-index .uv-index-level-text {
+  font-size: 27px;
+  text-transform: capitalize;
+}
+.wrapper .content .forecast .forecast-details .forecast-details-list .sunrise .forecast-details-item-heading-icon {
+  background-image: url("../icons/sunrise.svg");
+}
+.wrapper .content .forecast .forecast-details .forecast-details-list .sunrise .sunrise-time {
+  font-size: 43px;
+}
+.wrapper .content .forecast .forecast-details .forecast-details-list .sunrise .forecast-details-item-description {
+  text-align: center;
+}
+.wrapper .content .forecast .forecast-details .forecast-details-list .wind .forecast-details-item-heading-icon {
+  background-image: url("../icons/wind.svg");
+}
+.wrapper .content .forecast .forecast-details .forecast-details-list .wind .wind-img {
+  display: flex;
+  justify-content: center;
+}
+.wrapper .content .forecast .forecast-details .forecast-details-list .feels-like .forecast-details-item-heading-icon {
+  background-image: url("../icons/feels-like.svg");
+}
+.wrapper .content .forecast .forecast-details .forecast-details-list .feels-like .feels-like-text {
+  font-size: 35px;
+}
+.wrapper .content .forecast .forecast-details .forecast-details-list .feels-like .forecast-details-item-description {
+  position: absolute;
+  bottom: 20px;
+}
+.wrapper .content .forecast .forecast-details .forecast-details-list .humidity .forecast-details-item-heading-icon {
+  background-image: url("../icons/humidity.svg");
+}
+.wrapper .content .forecast .forecast-details .forecast-details-list .humidity .humidity-text {
+  font-size: 35px;
+}
+.wrapper .content .forecast .forecast-details .forecast-details-list .humidity .forecast-details-item-description {
+  position: absolute;
+  bottom: 20px;
+}
+.wrapper .content .forecast .forecast-details .forecast-details-list .visibility .forecast-details-item-heading-icon {
+  background-image: url("../icons/visibility.svg");
+}
+.wrapper .content .forecast .forecast-details .forecast-details-list .visibility .visibility-text {
+  font-size: 43px;
+}
+.wrapper .content .forecast .forecast-details .forecast-details-list .visibility .forecast-details-item-description {
+  position: absolute;
+  bottom: 20px;
+}
+.wrapper .content .forecast .forecast-details .forecast-details-list .forecast-details-item {
+  position: relative;
+  padding: 20px 15px;
+}
+.wrapper .content .forecast .forecast-details .forecast-details-list .forecast-details-item .forecast-details-item-heading {
+  display: flex;
+  margin-bottom: 10px;
+}
+.wrapper .content .forecast .forecast-details .forecast-details-list .forecast-details-item .forecast-details-item-heading .forecast-details-item-heading-icon {
+  background-size: cover;
+  width: 20px;
+  height: 20px;
+}
+.wrapper .content .forecast .forecast-details .forecast-details-list .forecast-details-item .forecast-details-item-heading .forecast-details-item-heading-text {
+  font-weight: 500;
+  font-size: 18px;
+  text-transform: uppercase;
+  opacity: 0.3;
+}
+.wrapper .content .forecast .forecast-details .forecast-details-list .forecast-details-item .forecast-details-item-description {
+  position: absolute;
+  bottom: 20px;
+  font-size: 22px;
+  color: #e9e9e9;
+}
+.wrapper .sidebar {
+  background: rgba(0, 148, 255, 0.15);
+  backdrop-filter: blur(340px);
+}
+.wrapper .sidebar .search-container {
+  background: #ffffff;
+  border-radius: 47px;
+  display: flex;
+  margin: 25px 20px 10px 20px;
+  padding: 11px 16px;
+}
+.wrapper .sidebar .search-container:before {
+  display: block;
+  content: " ";
+  background-image: url("../icons/search.svg");
+  background-size: 22px 22px;
+  height: 22px;
+  width: 22px;
+  margin-right: 10px;
+}
+.wrapper .sidebar .search-container .search-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+.wrapper .sidebar .location {
+  height: 200px;
+  position: relative;
+  margin: 20px;
+  overflow: hidden;
+}
+.wrapper .sidebar .location video {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  object-fit: cover;
+  z-index: 0;
+  border-radius: 15px;
+}
+.wrapper .sidebar .location .location-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  padding: 22px 20px;
+}
+.wrapper .sidebar .location .location-container .location-description {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.wrapper .sidebar .location .location-container .location-description .location-top-info .location-name {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 39px;
+}
+.wrapper .sidebar .location .location-container .location-description .location-top-info .location-time {
+  font-size: 21px;
+}
+.wrapper .sidebar .location .location-container .location-description .location-bottom-info {
+  font-size: 21px;
+  width: 250px;
+  line-height: 28px;
+}
+.wrapper .sidebar .location .location-container .location-temperature {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.wrapper .sidebar .location .location-container .location-temperature .location-current-temperature {
+  font-size: 110px;
+  font-weight: 300;
+}
+.wrapper .sidebar .location .location-container .location-temperature .location-temperature-peaks {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 21px;
+  padding: 0 18px;
+}
+
+/*# sourceMappingURL=style.css.map */
