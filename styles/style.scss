@@ -32,26 +32,25 @@ $colorBlue: #23abf6;
 .wrapper {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  grid-template-rows: 1fr;
-  gap: 0 20px;
+  grid-template-rows: 1080px;
+  gap: 0 24px;
 
   padding: 0 0 15px 35px;
 
   position: relative;
   z-index: 1;
 
-
   .content {
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: 1fr 2fr;
-	gap: 0 0;
+	grid-template-rows: 1fr 3fr;
+	grid-row-gap: 38px;
 
 	.current-weather {
 	  display: flex;
 	  justify-content: center;
 
-	  margin-top: 80px;
+	  margin-top: 82px;
 
 	  .current-weather-container {
 		display: flex;
@@ -61,15 +60,18 @@ $colorBlue: #23abf6;
 
 		.current-weather-city {
 		  font-size: 37px;
+		  line-height: 44px;
 		}
 
 		.current-weather-temperature {
 		  font-size: 102px;
 		  font-weight: 200;
+		  line-height: 102px;
 		}
 
 		.current-weather-conditions {
 		  font-size: 24px;
+		  line-height: 29px;
 		}
 
 		.current-weather-peaks {
@@ -78,6 +80,7 @@ $colorBlue: #23abf6;
 
 		  font-size: 21px;
 		  font-weight: 500;
+		  line-height: 25px;
 
 		  padding: 0 10px;
 		}
@@ -87,23 +90,25 @@ $colorBlue: #23abf6;
 	.forecast {
 	  display: grid;
 	  grid-template-columns: 1fr 1fr;
-	  grid-template-rows: 1fr;
-	  grid-gap: 35px;
+	  grid-template-rows: 706px;
+	  grid-gap: 37px;
 
 	  .text-medium {
 		font-weight: 500;
 		font-size: 22px;
+		line-height: 26px;
 
 		color: $colorGrey;
 	  }
 
 	  .forecast-day {
-		padding: 15px 40px 15px 15px;
+		padding: 14px 48px 14px 15px;
 		.forecast-day-heading {
 		  text-align: center;
 		  color: $colorGrey;
 		  font-weight: 500;
 		  font-size: 15px;
+		  line-height: 18px;
 
 		  margin-bottom: 20px;
 		}
@@ -114,10 +119,13 @@ $colorBlue: #23abf6;
 			display: flex;
 			justify-content: space-between;
 
-			padding: 5px 0;
+			padding: 24px 0 15px 0;
 
 			border-bottom: 0.2px solid rgba(233, 233, 233, 0.5);
 
+			&:first-child {
+			  padding-top: 0;
+			}
 
 			.forecast-day-week {
 			  display: flex;
@@ -125,7 +133,8 @@ $colorBlue: #23abf6;
 			  align-items: center;
 
 			  .forecast-day-week-name {
-				margin-right: 15px;
+				margin-right: 16px;
+				line-height: 26px;
 			  }
 
 			  .forecast-day-week-weather {
@@ -142,6 +151,7 @@ $colorBlue: #23abf6;
 
 				  font-weight: 600;
 				  font-size: 15px;
+				  line-height: 18px;
 				}
 			  }
 			}
@@ -162,8 +172,8 @@ $colorBlue: #23abf6;
 	  .forecast-details {
 		display: grid;
 		grid-template-columns: 1fr;
-		grid-template-rows: 1fr 2fr;
-		grid-gap: 50px 0;
+		grid-template-rows: 200px 2fr;
+		grid-gap: 53px 0;
 
 		.forecast-hour {
 		  padding: 10px;
@@ -200,7 +210,7 @@ $colorBlue: #23abf6;
 				width: 25px;
 				height: 25px;
 
-				margin: 25px 0;
+				margin: 24px 0;
 
 				background-image: url("../icons/rainy.svg");
 				background-size: cover;
@@ -217,9 +227,9 @@ $colorBlue: #23abf6;
 		.forecast-details-list {
 		  display: grid;
 		  grid-template-columns: 1fr 1fr 1fr;
-		  grid-template-rows: 1fr 1fr;
-		  grid-column-gap: 15px;
-		  grid-row-gap: 50px;
+		  grid-template-rows: 200px 200px;
+		  grid-column-gap: 14px;
+		  grid-row-gap: 53px;
 
 		  color: $colorGrey;
 
@@ -231,10 +241,12 @@ $colorBlue: #23abf6;
 
 			.uv-index-level-num {
 			  font-size: 44px;
+			  line-height: 53px;
 			}
 
 			.uv-index-level-text {
 			  font-size: 27px;
+			  line-height: 32px;
 			  text-transform: capitalize;
 			}
 		  }
@@ -245,7 +257,8 @@ $colorBlue: #23abf6;
 			}
 
 			.sunrise-time {
-			  font-size: 43px;
+			  font-size: 39px;
+			  margin: 7px 0;
 			}
 
 			.forecast-details-item-description {
@@ -312,12 +325,12 @@ $colorBlue: #23abf6;
 		  .forecast-details-item {
 			position: relative;
 
-			padding: 20px 15px;
+			padding: 14px 13px 13px 20px;
 
 			.forecast-details-item-heading {
 			  display: flex;
 
-			  margin-bottom: 10px;
+			  margin-bottom: 6px;
 
 			  .forecast-details-item-heading-icon {
 				background-size: cover;
@@ -336,9 +349,10 @@ $colorBlue: #23abf6;
 
 			.forecast-details-item-description {
 			  position: absolute;
-			  bottom: 20px;
+			  bottom: 13px;
 
 			  font-size: 22px;
+			  line-height: 25px;
 			  color: $colorGrey;
 			}
 		  }
@@ -357,7 +371,7 @@ $colorBlue: #23abf6;
 
 	  display: flex;
 
-	  margin: 25px 20px 10px 20px;
+	  margin: 26px 20px 10px 20px;
 	  padding: 11px 16px;
 
 	  &:before {
