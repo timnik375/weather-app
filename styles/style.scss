@@ -31,8 +31,8 @@ $colorBlue: #23abf6;
 
 .wrapper {
   display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: 1080px;
+  grid-template-columns: 2.5fr 1fr;
+  //grid-template-rows: 1080px;
   gap: 0 24px;
   padding: 0 0 15px 35px;
   position: relative;
@@ -88,7 +88,7 @@ $colorBlue: #23abf6;
 	.forecast {
 	  display: grid;
 	  grid-template-columns: 1fr 1fr;
-	  grid-template-rows: 706px;
+	  //grid-template-rows: 706px;
 	  grid-gap: 37px;
 
 	  .text-medium {
@@ -170,6 +170,7 @@ $colorBlue: #23abf6;
 			  display: flex;
 			  justify-content: space-between;
 			  align-items: center;
+			  width: 60%;
 
 			  .forecast-day-temperature-bar {
 				margin: 0 10px;
@@ -225,8 +226,9 @@ $colorBlue: #23abf6;
 
 		.forecast-details-list {
 		  display: grid;
-		  grid-template-columns: 1fr 1fr 1fr;
-		  grid-template-rows: 200px 200px;
+		  //grid-template-columns: 1fr 1fr 1fr;
+		  //grid-template-rows: 200px 200px;
+		  grid-template-columns: repeat(auto-fill, minmax(200px, 200px));
 		  grid-column-gap: 14px;
 		  grid-row-gap: 53px;
 		  color: $colorGrey;
@@ -324,6 +326,7 @@ $colorBlue: #23abf6;
 		  .forecast-details-item {
 			position: relative;
 			padding: 14px 13px 13px 20px;
+			height: 200px;
 
 			.forecast-details-item-heading {
 			  display: flex;
@@ -349,6 +352,7 @@ $colorBlue: #23abf6;
 			  font-size: 22px;
 			  line-height: 25px;
 			  color: $colorGrey;
+			  padding-right: 10px;
 			}
 		  }
 		}
@@ -418,18 +422,18 @@ $colorBlue: #23abf6;
 
 		  .location-top-info {
 			.location-name {
-			  font-size: 32px;
+			  font-size: 1.7vw;
 			  font-weight: 700;
 			  line-height: 39px;
 			}
 
 			.location-time {
-			  font-size: 21px;
+			  font-size: 1.1vw;
 			}
 		  }
 
 		  .location-bottom-info {
-			font-size: 21px;
+			font-size: 1.1vw;
 			width: 250px;
 			line-height: 28px;
 		  }
@@ -439,17 +443,19 @@ $colorBlue: #23abf6;
 		  display: flex;
 		  flex-direction: column;
 		  justify-content: space-between;
+		  width: 150px;
 
 		  .location-current-temperature {
-			font-size: 110px;
+			font-size: 5.75vw;
 			font-weight: 300;
+			text-align: right;
 		  }
 
 		  .location-temperature-peaks {
 			display: flex;
 			justify-content: space-between;
 			font-weight: 500;
-			font-size: 21px;
+			font-size: 1.1vw;
 			padding: 0 18px;
 		  }
 		}
