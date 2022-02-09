@@ -41,8 +41,8 @@ function setCurrentLocationCard(data, elem) {
 	temperaturePeakLow.innerText = 'L:' + Math.round(data.daily[0].temp.min) + '°';
 }
 
-function setCardBackground(data) {
-	const video = document.querySelector('.location video');
+function setCardBackground(data, container) {
+	const video = container.querySelector('.location video');
 
 	switch (data.current.weather[0].main) {
 		case 'Thunderstorm':
@@ -77,7 +77,7 @@ async function setStartScreen () {
 	setCurrentLocationCard(data, document);
 
 	setForecast(data);
-	setCardBackground(data);
+	setCardBackground(data, document);
 }
 
 window.addEventListener('load', () => {
@@ -290,22 +290,22 @@ async function setSearchForecast () {
 
 	setCity(coords.results[0].formatted);
 	await setForecast(data);
-	createLocationCard(data);
-	saveCardInfo(data);
+	await createLocationCard(data, coords.results[0].formatted);
+	saveCardInfo(data, coords);
 }
 
-function saveCardInfo(data) {
-	localStorage.setItem(data.timezone.split('/')[1], JSON.stringify({lat: data.lat, lng: data.lon}));
+function saveCardInfo(data, coords) {
+	localStorage.setItem(coords.results[0].formatted.split(',')[0], JSON.stringify({lat: data.lat, lng: data.lon}));
 }
 
-function createLocationCard(data) {
+async function createLocationCard(data, coords) {
 	const cardContainer = document.querySelector('.location-list');
 	const currentCard = document.querySelector('.location');
 	let newCard = currentCard.cloneNode(true);
 	cardContainer.appendChild(newCard);
 
 	setCurrentLocationCard(data, newCard);
-	newCard.querySelector('.location-name p').innerText = data.timezone.split('/')[1];
+	newCard.querySelector('.location-name p').innerText = coords.split(',')[0];
 	newCard.querySelector('.location-time p').innerText = `${new Date(data.current.dt * 1000).getHours()}:${new Date(data.current.dt * 1000).getMinutes() < 10 ? '0' + new Date(data.current.dt * 1000).getMinutes() : new Date(data.current.dt * 1000).getMinutes()}`;
 
 	newCard.addEventListener('click', (e) => {
@@ -320,6 +320,8 @@ function createLocationCard(data) {
 			switchCard(e.currentTarget.querySelector('.location-name p').innerText);
 		}
 	});
+
+	setCardBackground(data, newCard);
 }
 
 async function loadCard() {
@@ -327,7 +329,7 @@ async function loadCard() {
 		let key = localStorage.key(i);
 		let data = await getForecast(JSON.parse(localStorage.getItem(key)));
 
-		createLocationCard(data);
+		createLocationCard(data, key);
 	}
 }
 
@@ -337,9 +339,6 @@ searchInput.addEventListener('keyup', () => {
 		searchInput.value = '';
 	}
 });
-
-
-
 
 async function switchCard(city) {
 	let coords = await getCoordinates(city);
