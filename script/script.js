@@ -311,7 +311,7 @@ async function createLocationCard(data, coords) {
 	newCard.addEventListener('click', (e) => {
 		if (e.target.classList.contains('delete-location')) {
 			e.target.parentNode.remove();
-			localStorage.removeItem(data.timezone.split('/')[1]);
+			localStorage.removeItem(coords.split(',')[0]);
 		}
 
 		if (e.currentTarget.querySelector('.location-name p').innerText === 'My location') {
