@@ -359,9 +359,11 @@ const matchList = document.querySelector('.match-list');
 const searchContainer = document.querySelector('.search-container');
 
 // Search and filter it
-async function searchCity(searchText) {
-	if (searchText.length !== 0) {
-		let url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchText}.json?access_token=pk.eyJ1IjoicWF6Ym9sYXQiLCJhIjoiY2t6Zm9sd3ViMnYwMjJ2bngyMzE5Y20zMSJ9.qBUkgW2YQOCwMn-KZgjv7w&cachebuster=1625641871908&autocomplete=true&types=place`;
+async function searchCity() {
+	searchContainer.classList.add('search-container-active');
+
+	if (search.value.length !== 0) {
+		let url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${search.value}.json?access_token=pk.eyJ1IjoicWF6Ym9sYXQiLCJhIjoiY2t6Zm9sd3ViMnYwMjJ2bngyMzE5Y20zMSJ9.qBUkgW2YQOCwMn-KZgjv7w&cachebuster=1625641871908&autocomplete=true&types=place`;
 
 		const res = await fetch(url);
 		const data = await res.json();
@@ -399,7 +401,15 @@ function chooseCity() {
 	});
 }
 
-search.addEventListener('input', () => {
-	searchContainer.classList.add('search-container-active');
-	searchCity(search.value);
-});
+function debounce(func, ms) {
+	let timeout;
+	return function () {
+		const fnCall = () => { func.apply(this, arguments) }
+		clearTimeout(timeout);
+		timeout = setTimeout(fnCall, ms)
+	};
+}
+
+searchCity = debounce(searchCity, 400);
+
+search.addEventListener('keyup', searchCity);
