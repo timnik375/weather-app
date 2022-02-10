@@ -333,9 +333,6 @@
   background-color: #ffffff;
   color: #000000;
 }
-.wrapper .sidebar .search-container-active .match-container .match-item:last-child {
-  border-radius: 0 0 47px 47px;
-}
 .wrapper .sidebar .search-container-active .match-container .match-item:hover {
   background-color: #e9e9e9;
 }
