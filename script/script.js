@@ -83,7 +83,6 @@ async function setStartScreen () {
 window.addEventListener('load', () => {
 	setStartScreen();
 	loadCard();
-	setCardListeners();
 })
 
 function setCurrentWeather(data) {
@@ -292,6 +291,9 @@ async function setSearchForecast () {
 	await setForecast(data);
 	await createLocationCard(data, coords.results[0].formatted);
 	saveCardInfo(data, coords);
+	searchInput.value = '';
+	matchList.innerHTML = '';
+	searchContainer.classList.remove('search-container-active');
 }
 
 function saveCardInfo(data, coords) {
@@ -309,12 +311,16 @@ async function createLocationCard(data, coords) {
 	newCard.querySelector('.location-time p').innerText = `${new Date(data.current.dt * 1000).getHours()}:${new Date(data.current.dt * 1000).getMinutes() < 10 ? '0' + new Date(data.current.dt * 1000).getMinutes() : new Date(data.current.dt * 1000).getMinutes()}`;
 
 	newCard.addEventListener('click', (e) => {
+		e.preventDefault();
+		const city = newCard.querySelector('.location-name p').innerText;
+
 		if (e.target.classList.contains('delete-location')) {
+			if (document.querySelector('.current-weather-city').innerText === city) {
+				switchCard(currentCard.querySelector('.location-time p').innerText);
+			}
 			e.target.parentNode.remove();
 			localStorage.removeItem(coords.split(',')[0]);
-		}
-
-		if (e.currentTarget.querySelector('.location-name p').innerText === 'My location') {
+		} else if (e.currentTarget.querySelector('.location-name p').innerText === 'My location') {
 			switchCard(e.currentTarget.querySelector('.location-time p').innerText);
 		} else {
 			switchCard(e.currentTarget.querySelector('.location-name p').innerText);
@@ -336,7 +342,6 @@ async function loadCard() {
 searchInput.addEventListener('keyup', () => {
 	if (event.keyCode === 13) {
 		setSearchForecast();
-		searchInput.value = '';
 	}
 });
 
@@ -348,16 +353,53 @@ async function switchCard(city) {
 	await setForecast(data);
 }
 
-function setCardListeners() {
-	document.querySelectorAll('.location').forEach((elem) => {
-		elem.addEventListener('click', (e) => {
-			if (!e.target.classList.contains('delete-location')) {
-				if (e.currentTarget.querySelector('.location-name p').innerText === 'My location') {
-					switchCard(e.currentTarget.querySelector('.location-time p').innerText);
-				} else {
-					switchCard(e.currentTarget.querySelector('.location-name p').innerText);
-				}
-			}
-		})
-	})
+// City autocomplete
+const search = document.querySelector('.search-input');
+const matchList = document.querySelector('.match-list');
+const searchContainer = document.querySelector('.search-container');
+
+// Search and filter it
+async function searchCity(searchText) {
+	if (searchText.length !== 0) {
+		let url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchText}.json?access_token=pk.eyJ1IjoicWF6Ym9sYXQiLCJhIjoiY2t6Zm9sd3ViMnYwMjJ2bngyMzE5Y20zMSJ9.qBUkgW2YQOCwMn-KZgjv7w&cachebuster=1625641871908&autocomplete=true&types=place`;
+
+		const res = await fetch(url);
+		const data = await res.json();
+
+		outputHtml(data.features.map(elem => elem['place_name']));
+	} else {
+		outputHtml([]);
+	}
+
+	chooseCity();
 }
+
+// Show search results in HTML
+function outputHtml(matches) {
+	if (matches.length > 0) {
+		const html = matches.map(match => `
+			<li class="match-item slideInDown">${match}</li>
+		`).join('');
+
+		matchList.innerHTML = html;
+	} else {
+		matchList.innerHTML = '';
+		searchContainer.classList.remove('search-container-active');
+	}
+}
+
+function chooseCity() {
+	const matchItems = document.querySelectorAll('.match-item');
+
+	matchItems.forEach((elem) => {
+		elem.addEventListener('click', (e) => {
+			searchInput.value = e.target.innerText;
+			setSearchForecast();
+		})
+	});
+}
+
+search.addEventListener('input', () => {
+	searchContainer.classList.add('search-container-active');
+	searchCity(search.value);
+});

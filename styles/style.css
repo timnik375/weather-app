@@ -66,10 +66,14 @@
 .wrapper .content .current-weather .current-weather-container .current-weather-peaks {
   display: flex;
   justify-content: space-between;
+  align-self: center;
   font-size: 21px;
   font-weight: 500;
   line-height: 25px;
   padding: 0 10px;
+}
+.wrapper .content .current-weather .current-weather-container .current-weather-peaks .current-weather-peak-high {
+  margin-right: 5px;
 }
 .wrapper .content .forecast {
   display: grid;
@@ -99,6 +103,7 @@
 }
 .wrapper .content .forecast .forecast-day {
   padding: 14px 48px 14px 15px;
+  height: 480px;
 }
 .wrapper .content .forecast .forecast-day .forecast-day-heading {
   text-align: center;
@@ -294,6 +299,7 @@
   display: flex;
   margin: 26px 20px 10px 20px;
   padding: 11px 16px;
+  transition: all 500ms;
 }
 .wrapper .sidebar .search-container:before {
   display: block;
@@ -310,11 +316,37 @@
   border: none;
   outline: none;
 }
+.wrapper .sidebar .search-container-active {
+  border-radius: 47px 47px 0 0;
+}
+.wrapper .sidebar .search-container-active .match-container .match-list {
+  position: absolute;
+  z-index: 99;
+  top: 70px;
+  left: 0;
+  right: 0;
+}
+.wrapper .sidebar .search-container-active .match-container .match-item {
+  margin: 0 20px;
+  padding: 10px;
+  cursor: pointer;
+  background-color: #ffffff;
+  color: #000000;
+}
+.wrapper .sidebar .search-container-active .match-container .match-item:last-child {
+  border-radius: 0 0 47px 47px;
+}
+.wrapper .sidebar .search-container-active .match-container .match-item:hover {
+  background-color: #e9e9e9;
+}
 .wrapper .sidebar .location {
   height: 200px;
   position: relative;
   margin: 20px;
   overflow: hidden;
+}
+.wrapper .sidebar .location:hover {
+  cursor: pointer;
 }
 .wrapper .sidebar .location video {
   width: 100%;
@@ -384,6 +416,31 @@
 }
 .wrapper .sidebar .location:first-child .delete-location {
   display: none;
+}
+
+.slideInDown {
+  animation-name: slideInDown;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes slideInDown {
+  0% {
+    transform: translateY(-100%);
+    visibility: visible;
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes slideInDown {
+  0% {
+    transform: translateY(-100%);
+    visibility: visible;
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -77,10 +77,15 @@ $colorBlue: #23abf6;
 		.current-weather-peaks {
 		  display: flex;
 		  justify-content: space-between;
+		  align-self: center;
 		  font-size: 21px;
 		  font-weight: 500;
 		  line-height: 25px;
 		  padding: 0 10px;
+
+		  .current-weather-peak-high {
+			margin-right: 5px;
+		  }
 		}
 	  }
 	}
@@ -120,6 +125,8 @@ $colorBlue: #23abf6;
 
 	  .forecast-day {
 		padding: 14px 48px 14px 15px;
+		height: 480px;
+
 		.forecast-day-heading {
 		  text-align: center;
 		  color: $colorGrey;
@@ -374,6 +381,7 @@ $colorBlue: #23abf6;
 	  display: flex;
 	  margin: 26px 20px 10px 20px;
 	  padding: 11px 16px;
+	  transition: all 500ms;
 
 	  &:before {
 		display: block;
@@ -393,11 +401,44 @@ $colorBlue: #23abf6;
 	  }
 	}
 
+	.search-container-active {
+	  border-radius: 47px 47px 0 0;
+
+	  .match-container {
+		.match-list {
+		  position: absolute;
+		  z-index: 99;
+		  top: 70px;
+		  left: 0;
+		  right: 0;
+		}
+		.match-item {
+		  margin: 0 20px;
+		  padding: 10px;
+		  cursor: pointer;
+		  background-color: #ffffff;
+		  color: #000000;
+
+		  &:last-child {
+			border-radius: 0 0 47px 47px;
+		  }
+		}
+
+		.match-item:hover {
+		  background-color: #e9e9e9;
+		}
+	  }
+	}
+
 	.location {
 	  height: 200px;
 	  position: relative;
 	  margin: 20px;
 	  overflow: hidden;
+
+	  &:hover {
+		cursor: pointer;
+	  }
 
 	  video {
 		width: 100%;
@@ -484,5 +525,29 @@ $colorBlue: #23abf6;
 		}
 	  }
 	}
+  }
+}
+
+.slideInDown {
+  animation-name: slideInDown;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+}
+@-webkit-keyframes slideInDown {
+  0% {
+	transform: translateY(-100%);
+	visibility: visible;
+  }
+  100% {
+	transform: translateY(0);
+  }
+}
+@keyframes slideInDown {
+  0% {
+	transform: translateY(-100%);
+	visibility: visible;
+  }
+  100% {
+	transform: translateY(0);
   }
 }
