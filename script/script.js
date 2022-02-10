@@ -337,6 +337,8 @@ searchInput.addEventListener('keyup', () => {
 	if (event.keyCode === 13) {
 		setSearchForecast();
 		searchInput.value = '';
+		matchList.innerHTML = '';
+		searchContainer.classList.remove('search-container-active');
 	}
 });
 
@@ -361,3 +363,57 @@ function setCardListeners() {
 		})
 	})
 }
+
+// City autocomplete
+const search = document.querySelector('.search-input');
+const matchList = document.querySelector('.match-list');
+const searchContainer = document.querySelector('.search-container');
+
+// Search and filter it
+async function searchCity(searchText) {
+	if (searchText.length !== 0) {
+		let url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${searchText}.json?access_token=pk.eyJ1IjoicWF6Ym9sYXQiLCJhIjoiY2t6Zm9sd3ViMnYwMjJ2bngyMzE5Y20zMSJ9.qBUkgW2YQOCwMn-KZgjv7w&cachebuster=1625641871908&autocomplete=true&types=place`;
+
+		const res = await fetch(url);
+		const data = await res.json();
+
+		outputHtml(data.features.map(elem => elem['place_name']));
+	} else {
+		outputHtml([]);
+	}
+
+	chooseCity();
+}
+
+// Show search results in HTML
+function outputHtml(matches) {
+	if (matches.length > 0) {
+		const html = matches.map(match => `
+			<li class="match-item slideInDown">${match}</li>
+		`).join('');
+
+		matchList.innerHTML = html;
+	} else {
+		matchList.innerHTML = '';
+		searchContainer.classList.remove('search-container-active');
+	}
+}
+
+function chooseCity() {
+	const matchItems = document.querySelectorAll('.match-item');
+
+	matchItems.forEach((elem) => {
+		elem.addEventListener('click', (e) => {
+			searchInput.value = e.target.innerText;
+			setSearchForecast();
+			searchInput.value = '';
+			matchList.innerHTML = '';
+			searchContainer.classList.remove('search-container-active');
+		})
+	});
+}
+
+search.addEventListener('input', () => {
+	searchContainer.classList.add('search-container-active');
+	searchCity(search.value);
+});
