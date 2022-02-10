@@ -66,10 +66,14 @@
 .wrapper .content .current-weather .current-weather-container .current-weather-peaks {
   display: flex;
   justify-content: space-between;
+  align-self: center;
   font-size: 21px;
   font-weight: 500;
   line-height: 25px;
   padding: 0 10px;
+}
+.wrapper .content .current-weather .current-weather-container .current-weather-peaks .current-weather-peak-high {
+  margin-right: 5px;
 }
 .wrapper .content .forecast {
   display: grid;
@@ -99,6 +103,7 @@
 }
 .wrapper .content .forecast .forecast-day {
   padding: 14px 48px 14px 15px;
+  height: 480px;
 }
 .wrapper .content .forecast .forecast-day .forecast-day-heading {
   text-align: center;
@@ -339,6 +344,9 @@
   position: relative;
   margin: 20px;
   overflow: hidden;
+}
+.wrapper .sidebar .location:hover {
+  cursor: pointer;
 }
 .wrapper .sidebar .location video {
   width: 100%;

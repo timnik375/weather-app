@@ -77,10 +77,15 @@ $colorBlue: #23abf6;
 		.current-weather-peaks {
 		  display: flex;
 		  justify-content: space-between;
+		  align-self: center;
 		  font-size: 21px;
 		  font-weight: 500;
 		  line-height: 25px;
 		  padding: 0 10px;
+
+		  .current-weather-peak-high {
+			margin-right: 5px;
+		  }
 		}
 	  }
 	}
@@ -120,6 +125,8 @@ $colorBlue: #23abf6;
 
 	  .forecast-day {
 		padding: 14px 48px 14px 15px;
+		height: 480px;
+
 		.forecast-day-heading {
 		  text-align: center;
 		  color: $colorGrey;
@@ -428,6 +435,10 @@ $colorBlue: #23abf6;
 	  position: relative;
 	  margin: 20px;
 	  overflow: hidden;
+
+	  &:hover {
+		cursor: pointer;
+	  }
 
 	  video {
 		width: 100%;
